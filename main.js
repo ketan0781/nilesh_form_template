@@ -7,15 +7,13 @@ angular
 
     $scope.user = {
       fullname: '',
-      pronoun:'',
-      direct:'asdsa',
-      phone:'',
-      fax: '',
-      twitter_handle:'',
+      job_title:'',
+      email: '',
+      address:'',
+      website:'',
+      office:'',
+      phone:''
     };
-
-    $scope.pronouns = ('test1 test2 test3 test4 test5').split(' ').map(function(name) {
-        return {abbrev: name};
-      });
+    
   })
  

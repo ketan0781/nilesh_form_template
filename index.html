@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>  
-     <header><img src="image/zg.png" alt="ZillowGroup"></header>    
+    <header><img src="image/zg.png" alt="ZillowGroup"></header>    
     <div ng-controller="formController" layout="column" ng-cloak class="md-inline-form main">
         <div class="form-main" >
             <form name="userForm">
@@ -18,84 +18,53 @@
                         <md-input-container  class="md-block" flex-gt-sm>
                                 <label>Job Title</label>
                                 <input ng-model="user.job_title">
-                            </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                                <label>Pronouns</label>
-                                <md-select ng-model="user.pronoun" >
-                                <md-option ng-repeat="pronoun in pronouns" value="{{pronoun.abbrev}}">
-                                    {{pronoun.abbrev}}
-                                </md-option>
-                                </md-select>
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
-                            <label>Direct</label>
-                            <input name="direct" ng-model="user.direct" ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" />
+                            <label>Email</label>
+                            <input name="email" ng-model="user.email" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                            <div ng-messages="userForm.email.$error" ng-hide="showHints">
+                              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                              </div>
+                            </div>
+                          </md-input-container>
+    
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Office</label>
+                            <input name="office" ng-model="user.office" ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/" />
                 
-                            <div class="hint" ng-show="showHints">(###) ###-####</div>
+                            <div class="hint" ng-show="showHints">###-###-####</div>
                 
                             <div ng-messages="userForm.direct.$error" ng-hide="showHints">
-                            <div ng-message="pattern">(###) ###-#### - Please enter a valid phone number.</div>
+                            <div ng-message="pattern">###-###-#### - Please enter a valid phone number.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Mobile</label>
-                            <input name="mobile" ng-model="user.mobile" ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" />
+                            <input name="mobile" ng-model="user.mobile" ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/" />
                 
-                            <div class="hint" ng-show="showHints">(###) ###-####</div>
+                            <div class="hint" ng-show="showHints">###-###-####</div>
                 
                             <div ng-messages="userForm.mobile.$error" ng-hide="showHints">
-                            <div ng-message="pattern">(###) ###-#### - Please enter a valid phone number.</div>
+                            <div ng-message="pattern">###-###-#### - Please enter a valid phone number.</div>
                             </div>
                         </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Fax</label>
-                            <input name="fax" ng-model="user.fax" ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" />
-                            <div class="hint" ng-show="showHints">(###) ###-####</div>
-                
-                            <div ng-messages="userForm.fax.$error" ng-hide="showHints">
-                            <div ng-message="pattern">(###) ###-#### - Please enter a valid fax number.</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                                <label>Twitter Handle</label>
-                                <input name="fax" ng-model="user.twitter_handle"/>
-                                <div class="hint" ng-show="showHints">@ZillowGroup</div>
-                    
-                                <div ng-messages="userForm.fax.$error" ng-hide="showHints">
-                                <div ng-message="pattern">(###) ###-#### - Please enter a valid fax number.</div>
-                                </div>
-                            </md-input-container>
 
-                        <md-input-container class="md-block" style="margin-top:0px">
-                            <md-checkbox name="Zillow" ng-model="project.Zillow" required>Zillow</md-checkbox>
-                            <md-checkbox name="Trullia" ng-model="project.Trullia" required>Trullia</md-checkbox>
-                            <md-checkbox name="Streeteasy" ng-model="project.Streeteasy" required>Streeteasy</md-checkbox>
-                            <md-checkbox name="Hotpads" ng-model="project.Hotpads" required>Hotpads</md-checkbox>
-                            <md-checkbox name="Naked_Apartments" ng-model="project.Naked_Apartments" required>Naked Apartments</md-checkbox>
-                            <md-checkbox name="Out_East" ng-model="project.Out_East" required>Out East</md-checkbox>
-                        </md-input-container>
-                
                 </md-content>
             </form>
-    </div>
-    <div class="display-text">
-        <div class="fullname">{{user.fullname}}</div>
-        <div class="title">{{user.job_title}}</div>
-        <div class="pronoun">{{user.pronoun}}</div>
-        <div class="direct">{{user.direct}}</div>
-        <div class="mobile">{{user.mobile}}</div>
-        <div class="fax">{{user.fax}}</div>
-        <div class="twitter-handle">{{user.twitter_handle}}</div>
-        <img class="zillow-group-image" src="https://mma.prnewswire.com/media/844957/Zillow_Group.jpg">
-        <div class="list-of-companies">
-            <span ng-if="project.Zillow">Zillow</span> | 
-            <span ng-if="project.Trullia">Trullia</span> |
-            <span ng-if="project.Streeteasy">Streeteasy</span> |
-            <span ng-if="project.Hotpads">Hotpads</span> |
-            <span ng-if="project.Naked_Apartments">Naked Apartments</span> |
-            <span ng-if="project.Out_East">Out East</span> 
         </div>
-    </div>
+        <div class="display-text">
+            <div class="fullname">{{user.fullname}}</div>
+            <div class="title">{{user.job_title}}</div>
+            <address>
+              <a href="#">65E 56th 17th Floor | New York NY 10022</a>
+            </address>
+            <a class="email" href="#">{{user.email}}</a>
+            <a class="website" href="https://www.clearme.com/">www.clearme.com</a>
+            <div class="direct">{{user.office}}</div>
+            <div class="mobile">{{user.mobile}}</div>
+            <img class="zillow-group-image" src="https://mma.prnewswire.com/media/844957/Zillow_Group.jpg">
+        </div>
     </div>
  
 
